@@ -1,1 +1,1 @@
-hello world. this is file2
+hello world. this is file2. and we are using bufwriter with writer fn

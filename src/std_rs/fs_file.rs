@@ -51,6 +51,28 @@ pub fn create_bufwriter_file() {
     writer.flush().unwrap();
 }
 
+pub fn create_bufwriter_writer_file() {
+    let file = match File::create("mytext2.txt") {
+        Ok(f) => f,
+        Err(e) => {
+            println!("{:?}", e);
+            return;
+        }
+    };
+
+    let mut writer = BufWriter::new(file);
+
+    let mut text_bytes: &[u8] =
+        b"hello world. this is file2. and we are using bufwriter with writer fn";
+    while !text_bytes.is_empty() {
+        // Writes some prefix of the byte string, not necessarily all of it.
+        let n = writer.write(text_bytes).expect("couldn't write");
+        text_bytes = &text_bytes[n..];
+    }
+
+    writer.flush().unwrap();
+}
+
 pub fn read_file() {
     let mut buffer = [0; 20];
 
