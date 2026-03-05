@@ -1,0 +1,109 @@
+1) Core Memory & Ownership
+=============================
+
+std::mem – core memory functions (drop, replace, forget)
+std::ptr – raw pointers and unsafe pointer operations
+std::marker – marker types (PhantomData, Sized, Send, Sync)
+
+Box<T> — heap allocation
+std::rc::Rc<T> — reference counting (single thread)
+std::sync::Arc<T> — thread-safe reference counting
+std::cell::{Cell, RefCell} — interior mutability
+std::mem::ManuallyDrop — manual control of drop timing
+std::mem::MaybeUninit — uninitialized memory
+
+Option<T> — optional values
+Result<T,E> — error handling
+
+2) Operating System Interfaces
+===============================
+
+std::fs
+    File, OpenOptions, Metadata, ReadDir
+std::io
+    Read, Write, Seek, Error, buffered readers/writers
+std::env — access environment variables, args
+std::process — spawn and control OS processes
+
+-----File---------
+* Trait-based design
+
+Understand that File implements:
+- Read
+- Write
+- Seek
+
+* Resource management
+- File closes automatically on Drop
+- It is not Copy
+- It is move-only
+- try_clone() duplicates the underlying descriptor
+
+* Blocking behavior
+
+Understand:
+- File I/O is blocking
+- read() waits for kernel
+- No async by default
+- Why blocking matters
+
+* Reading as bytes (not only String)
+
+You should be comfortable with:
+"let mut buf = [0u8; 1024];
+file.read(&mut buf)?;"
+
+* ErrorKind inspection
+
+You should know:
+- use std::io::ErrorKind;
+And match on it.
+
+* Only basic parts of Level 3 (metadata + sync)
+
+3) Low-Level I/O & Networking
+================================
+
+std::net
+    TcpListener, TcpStream, UdpSocket, address types
+std::os — OS-specific extensions
+    e.g., file descriptors, raw handles, OS socket types
+    submodules like std::os::unix and std::os::windows
+
+4) Concurrency & Synchronization
+=================================
+
+std::thread — native OS threads
+std::sync
+    Mutex, RwLock, Condvar
+    atomic types for lock-free concurrency
+    mpsc channels for message passing
+
+5) Collections & Data Structures
+===================================
+
+std::collections
+    Vec<T>, VecDeque
+    HashMap, BTreeMap, HashSet, BTreeSet
+
+6) Foreign Function / C Interop
+===============================
+
+std::ffi
+    CString, CStr, and OS string types OsStr, OsString
+
+7) Traits & Language Helpers
+===============================
+
+std::ops — operator traits, ranges, indexing
+std::convert — From, Into conversions
+std::fmt — formatting for logging/debugging
+std::iter — iterators
+    Prelude traits — auto-imported stuff like Clone, Copy, Drop, Send, Sync
+
+8) (Optional) High-Level Helpers
+=================================
+
+Strings & text: String, &str
+Slices and arrays: [T], &[T], &mut [T], Vec<T>
+Timing & scheduling: std::time
