@@ -169,3 +169,16 @@ pub fn read_file_stream() {
         println!("{}", to_text);
     }
 }
+
+pub fn custom_buffer_bufferreader() {
+    let file = File::open("mytext2.txt").expect("unable to open");
+
+    // 2KB buffer (2 * 1024)
+    let mut reader = BufReader::with_capacity(2 * 1024, file);
+
+    let mut buffer = Vec::new();
+    reader.read_to_end(&mut buffer).expect("unable to read");
+
+    let text = String::from_utf8_lossy(&buffer);
+    println!("{:?}", text);
+}
