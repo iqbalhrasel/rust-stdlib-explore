@@ -1,9 +1,7 @@
-use crate::std_rs::fs_file::{
-    create_bufwriter_file, create_bufwriter_writer_file, custom_buffer_bufferreader,
-};
+use crate::std_rs::fs_file::custom_buffer_bufferwriter;
 
 mod std_rs;
 
 fn main() {
-    custom_buffer_bufferreader();
+    custom_buffer_bufferwriter();
 }

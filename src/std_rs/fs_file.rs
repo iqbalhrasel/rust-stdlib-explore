@@ -182,3 +182,14 @@ pub fn custom_buffer_bufferreader() {
     let text = String::from_utf8_lossy(&buffer);
     println!("{:?}", text);
 }
+
+pub fn custom_buffer_bufferwriter() {
+    let file = File::create("mytext3.txt").expect("unable to create");
+
+    // 2KB buffer (2 * 1024)
+    let mut writer = BufWriter::with_capacity(2 * 1024, file);
+
+    writer
+        .write_all(b"this is custom buffer writer")
+        .expect("unable to write");
+}
