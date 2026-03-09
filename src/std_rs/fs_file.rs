@@ -4,6 +4,16 @@ use std::{
     str::from_utf8,
 };
 
+/*
+ * Fie operation is blocking by default
+ * std::fs::File uses synchronous OS system calls.
+ * Typical underlying syscalls:
+ * read()
+ * write()
+ * lseek()
+ * These syscalls are blocking by default.
+ */
+
 pub fn create_write_file() {
     let mut file = match File::create("mytext.txt") {
         Ok(f) => f,

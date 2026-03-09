@@ -61,6 +61,8 @@ And match on it.
 
 * Only basic parts of Level 3 (metadata + sync)
 
+//\\ future ref: BufRead + lines() //\\
+
 3) Low-Level I/O & Networking
 ================================
 
